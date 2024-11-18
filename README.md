@@ -59,6 +59,40 @@ ofxOceanodeOnlineRadio::registerNodes(oceanode);
 - [ofxOceanode](https://github.com/PlaymodesStudio/ofxOceanode)
 - VLC 3.0+ (installed via script)
 
-## License
 
-MIT License - See LICENSE.md
+## Radio Stations Setup
+
+The addon comes with a default set of radio stations.
+
+1. Create a `data/radio` folder in your project
+2. Copy the default `stations.json` file
+
+To customize your stations:
+1. Edit `data/radio/stations.json` in your project
+2. Use this format:
+```json
+{
+    "station.name": "http://stream.url",
+    "another.station": "http://another.url"
+}
+```
+
+### Station Categories
+Stations can be organized by categories using dot notation:
+- `classical.mozart`
+- `jazz.swiss`
+- `ambient.sleep`
+
+This helps organize stations in the node's selection dropdown.
+
+### Finding Stations
+You can find radio stream URLs from:
+- [Radio Browser](https://www.radio-browser.info/)
+- [Online Radio Box](https://onlineradiobox.com/)
+- Public radio websites (BBC, NPR, etc.)
+
+### Testing Stations
+Before adding a station, verify the stream URL works in VLC:
+1. Open VLC
+2. Media -> Open Network Stream
+3. Paste the URL and test playback
