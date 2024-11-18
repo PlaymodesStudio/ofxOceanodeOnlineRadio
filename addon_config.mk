@@ -1,38 +1,35 @@
-[addon]
-    name = ofxOceanodeOnlineRadio
-    description = Internet radio streaming node for Oceanode with multi-channel output routing
-    author = Your Name
-    version = 1.0.0
+meta:
+    ADDON_NAME = ofxOceanodeOnlineRadio
+    ADDON_DESCRIPTION = Internet radio streaming node for Oceanode with multi-channel output routing
+    ADDON_AUTHOR = Your Name
+    ADDON_TAGS = "radio" "streaming" "vlc" "audio" "oceanode"
+    ADDON_URL = http://github.com/yourusername/ofxOceanodeOnlineRadio
+
+common:
+    # dependencies with other addons
+    ADDON_DEPENDENCIES = ofxOceanode
+
+    # source files - include both .cpp and .h files
+    ADDON_SOURCES = src/radioStationVLC.cpp
+    ADDON_SOURCES += src/radioStationVLC.h
+    ADDON_SOURCES += src/ofxOceanodeOnlineRadio.h
     
-    # Dependencies
-    dependencies = ofxOceanode
+    # include search paths
+    ADDON_INCLUDES = src
+
+osx:
+    # VLC paths
+    ADDON_INCLUDES += "/Applications/VLC.app/Contents/MacOS/include"
     
-    # Include search paths, relative to the addon root
-    includepaths = src
+    # Compiler flags
+    ADDON_CFLAGS = -DVLC_PLUGIN_PATH='\"/Applications/VLC.app/Contents/MacOS/plugins\"'
+    ADDON_CPPFLAGS = -DVLC_PLUGIN_PATH='\"/Applications/VLC.app/Contents/MacOS/plugins\"'
     
-    # Source files relative to the addon root
-    srcs = src/ofxOceanodeOnlineRadio.cpp
-           src/radioStationVLC.cpp
+    # Linker flags
+    ADDON_LDFLAGS = -L"/Applications/VLC.app/Contents/MacOS/lib"
+    ADDON_LDFLAGS += -lvlc -lvlccore
+    ADDON_LDFLAGS += -Wl,-rpath,"/Applications/VLC.app/Contents/MacOS/lib"
     
-    # Header files relative to the addon root
-    headers = src/ofxOceanodeOnlineRadio.h
-              src/radioStationVLC.h
-              
-    # Platform specific settings - these will be automatically applied
-    [osx]
-        # VLC paths
-        includepaths += /Applications/VLC.app/Contents/MacOS/include
-        libraryPaths = /Applications/VLC.app/Contents/MacOS/lib
-        
-        # Link against VLC libraries
-        ADDON_LDFLAGS = -lvlc -lvlccore
-        
-        # Runtime search paths for dynamic libraries
-        ADDON_LDFLAGS += -Wl,-rpath,/Applications/VLC.app/Contents/MacOS/lib
-        
-        # Framework search paths
-        frameworkpaths = /Applications/VLC.app/Contents/MacOS
-        
-        # Additional compiler flags
-        ADDON_CFLAGS = -DVLC_PLUGIN_PATH='\"/Applications/VLC.app/Contents/MacOS/plugins\"'
-        ADDON_CPPFLAGS = -DVLC_PLUGIN_PATH='\"/Applications/VLC.app/Contents/MacOS/plugins\"'
+    # Libraries
+    ADDON_LIBS = "/Applications/VLC.app/Contents/MacOS/lib/libvlc.dylib"
+    ADDON_LIBS += "/Applications/VLC.app/Contents/MacOS/lib/libvlccore.dylib"
